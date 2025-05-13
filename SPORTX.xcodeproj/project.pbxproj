@@ -17,6 +17,7 @@
 		22383C8C2DD3CD0C00D5362C /* SPORTXTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22383C8B2DD3CD0C00D5362C /* SPORTXTests.swift */; };
 		22383C962DD3CD0C00D5362C /* SPORTXUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22383C952DD3CD0C00D5362C /* SPORTXUITests.swift */; };
 		22383C982DD3CD0C00D5362C /* SPORTXUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22383C972DD3CD0C00D5362C /* SPORTXUITestsLaunchTests.swift */; };
+		22383CA62DD3DEF900D5362C /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 22383CA52DD3DEF900D5362C /* Alamofire */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22383CA62DD3DEF900D5362C /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,6 +148,9 @@
 			dependencies = (
 			);
 			name = SPORTX;
+			packageProductDependencies = (
+				22383CA52DD3DEF900D5362C /* Alamofire */,
+			);
 			productName = SPORTX;
 			productReference = 22383C6E2DD3CD0900D5362C /* SPORTX.app */;
 			productType = "com.apple.product-type.application";
@@ -218,6 +223,9 @@
 				Base,
 			);
 			mainGroup = 22383C652DD3CD0900D5362C;
+			packageReferences = (
+				22383CA42DD3DEF900D5362C /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = 22383C6F2DD3CD0900D5362C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -600,6 +608,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		22383CA42DD3DEF900D5362C /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		22383CA52DD3DEF900D5362C /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 22383CA42DD3DEF900D5362C /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		22383C7A2DD3CD0900D5362C /* SPORTX.xcdatamodeld */ = {
