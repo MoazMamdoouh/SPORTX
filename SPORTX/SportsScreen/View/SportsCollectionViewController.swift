@@ -10,7 +10,6 @@ import UIKit
 private let reuseIdentifier = "SportsCollectionViewCell"
 
 class SportsCollectionViewController: UICollectionViewController {
-//    var sportsArray: [SportModel] = []
     let sportsArray = [
         SportModel(title: NSLocalizedString("football", comment: "football"), imageName: "football"),
         SportModel(title: NSLocalizedString("basketball", comment: "basketball"), imageName: "basketball"),
@@ -21,9 +20,23 @@ class SportsCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setupView()
+        
+    }
+    
+    func setupView(){
         navigationItem.title = NSLocalizedString("sports", comment: "sports")
         let nib = UINib(nibName: "SportsCollectionViewCell", bundle: nil)
         collectionView!.register(nib, forCellWithReuseIdentifier: reuseIdentifier)
+        
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 60),
+            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -60),
+
+        ])
     }
 
     // MARK: UICollectionViewDataSource
@@ -40,10 +53,7 @@ class SportsCollectionViewController: UICollectionViewController {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? SportsCollectionViewCell else {
             return UICollectionViewCell()
         }
-
-        print(sportsArray[indexPath.row])
         cell.setData(sportsArray[indexPath.row])
-
         return cell
     }
 
@@ -57,23 +67,27 @@ class SportsCollectionViewController: UICollectionViewController {
 extension SportsCollectionViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let itemsPerRow: CGFloat = 2
-        let screenWidth = UIScreen.main.bounds.width
-        let availableWidth = screenWidth - 40
+        let screenWidth = self.collectionView.frame.width
+        let availableWidth = screenWidth - 10
         let width = floor(availableWidth / itemsPerRow)
+        
+        let itemsPerColumn: CGFloat = 2
+        let screenHeight = self.collectionView.frame.height
+        let availableHeight = screenHeight - 20
+        let height = floor(availableHeight / itemsPerColumn)
 
-        return CGSize(width: width, height: width * 1.2)
+        return CGSize(width: width, height: height)
     }
 
-//    func collectionView(_ collectionView: UICollectionView,
-//                        layout collectionViewLayout: UICollectionViewLayout,
-//                        minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-//        return 16
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView,
-//                        layout collectionViewLayout: UICollectionViewLayout,
-//                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-//        return 16
-//    }
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
+    }
 
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 20
+    }
 }
