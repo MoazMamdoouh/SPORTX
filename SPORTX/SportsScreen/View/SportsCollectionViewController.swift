@@ -21,7 +21,6 @@ class SportsCollectionViewController: UICollectionViewController {
         super.viewDidLoad()
 
         setupView()
-        
     }
     
     func setupView(){

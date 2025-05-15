@@ -15,3 +15,5 @@ Podfile.lock
 
 # Misc
 .DS_Store
+
+config.xcconfig

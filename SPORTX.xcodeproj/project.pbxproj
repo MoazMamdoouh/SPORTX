@@ -39,6 +39,7 @@
 		1F9683E42DD54E11006E981B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1F9683E72DD54E83006E981B /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1F9683E82DD552E2006E981B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1F9684772DD682E4006E981B /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		22383C6E2DD3CD0900D5362C /* SPORTX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SPORTX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22383C7B2DD3CD0900D5362C /* SPORTX.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SPORTX.xcdatamodel; sourceTree = "<group>"; };
 		22383C802DD3CD0B00D5362C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -86,6 +87,7 @@
 		22383C652DD3CD0900D5362C = {
 			isa = PBXGroup;
 			children = (
+				1F9684772DD682E4006E981B /* Config.xcconfig */,
 				22383C702DD3CD0900D5362C /* SPORTX */,
 				22383C8A2DD3CD0C00D5362C /* SPORTXTests */,
 				22383C942DD3CD0C00D5362C /* SPORTXUITests */,
@@ -339,6 +341,7 @@
 /* Begin XCBuildConfiguration section */
 		22383C992DD3CD0C00D5362C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1F9684772DD682E4006E981B /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -400,6 +403,7 @@
 		};
 		22383C9A2DD3CD0C00D5362C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1F9684772DD682E4006E981B /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -455,6 +459,7 @@
 		};
 		22383C9C2DD3CD0C00D5362C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1F9684772DD682E4006E981B /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -482,6 +487,7 @@
 		};
 		22383C9D2DD3CD0C00D5362C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1F9684772DD682E4006E981B /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -509,6 +515,7 @@
 		};
 		22383C9F2DD3CD0C00D5362C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1F9684772DD682E4006E981B /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -528,6 +535,7 @@
 		};
 		22383CA02DD3CD0C00D5362C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1F9684772DD682E4006E981B /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";

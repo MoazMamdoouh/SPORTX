@@ -1,0 +1,11 @@
+//
+//  Config.xcconfig
+//  SPORTX
+//
+//  Created by Omar Abdelaziz on 15/05/2025.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://developer.apple.com/documentation/xcode/adding-a-build-configuration-file-to-your-project
+
+API_KEY = 3c1613b186253fd98db26b15d9baaefd22512d0f77a5ce759d4f308e736661c3
