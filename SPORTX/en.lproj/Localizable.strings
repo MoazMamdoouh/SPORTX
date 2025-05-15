@@ -1,0 +1,14 @@
+/* 
+  Localizable.strings
+  SPORTX
+
+  Created by Omar Abdelaziz on 15/05/2025.
+  
+*/
+
+"sports" = "Sports";
+"football" = "Football";
+"tennis" = "Tennis";
+"cricket" = "Cricket";
+"basketball" = "Basketball";
+

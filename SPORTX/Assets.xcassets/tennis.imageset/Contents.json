@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "tennis-ball-hard-court-corner-line.jpg",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "tennis-ball-hard-court-corner-line@2x.jpg",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "tennis-ball-hard-court-corner-line@3x.jpg",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
