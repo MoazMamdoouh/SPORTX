@@ -1,17 +1,16 @@
 //
-//  Leagues.swift
+//  CricketLeague.swift
 //  SPORTX
 //
 //  Created by Omar Abdelaziz on 15/05/2025.
 //
 
-struct LeagueResponse: Decodable {
+struct CricketLeagueResponse: Decodable {
     let success: Int
-    let result: [League]
+    let result: [CricketLeague]
 }
 
-struct League: Decodable {
+struct CricketLeague: Decodable {
     let league_key: Int
     let league_name: String
-    let league_logo: String?
 }

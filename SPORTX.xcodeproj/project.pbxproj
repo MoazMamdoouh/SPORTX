@@ -52,6 +52,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		1F2C65C32DD7DE1600BD9208 /* Utilities */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Utilities; sourceTree = "<group>"; };
 		1F9683D52DD5375F006E981B /* App */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = App; sourceTree = "<group>"; };
 		1F9683D62DD5378B006E981B /* SportsScreen */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = SportsScreen; sourceTree = "<group>"; };
 		1F9683DE2DD53827006E981B /* Model */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Model; sourceTree = "<group>"; };
@@ -108,6 +109,7 @@
 		22383C702DD3CD0900D5362C /* SPORTX */ = {
 			isa = PBXGroup;
 			children = (
+				1F2C65C32DD7DE1600BD9208 /* Utilities */,
 				1F9683D62DD5378B006E981B /* SportsScreen */,
 				1F9683D52DD5375F006E981B /* App */,
 				22383C7F2DD3CD0B00D5362C /* LaunchScreen.storyboard */,
@@ -153,6 +155,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				1F2C65C32DD7DE1600BD9208 /* Utilities */,
 				1F9683D52DD5375F006E981B /* App */,
 				1F9683D62DD5378B006E981B /* SportsScreen */,
 				1F9683DE2DD53827006E981B /* Model */,

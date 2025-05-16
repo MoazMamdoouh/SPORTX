@@ -21,13 +21,19 @@ class SportsCollectionViewController: UICollectionViewController {
         super.viewDidLoad()
 
         setupView()
+        FootballRepo(networkManager: NetworkManager.shared).getFixtures(leagueId: 302) {  result in
+            guard let result = result else {
+                return
+            }
+            print(result)
+        }
     }
-    
-    func setupView(){
+
+    func setupView() {
         navigationItem.title = NSLocalizedString("sports", comment: "sports")
         let nib = UINib(nibName: "SportsCollectionViewCell", bundle: nil)
         collectionView!.register(nib, forCellWithReuseIdentifier: reuseIdentifier)
-        
+
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
@@ -69,7 +75,7 @@ extension SportsCollectionViewController: UICollectionViewDelegateFlowLayout {
         let screenWidth = self.collectionView.frame.width
         let availableWidth = screenWidth - 10
         let width = floor(availableWidth / itemsPerRow)
-        
+
         let itemsPerColumn: CGFloat = 2
         let screenHeight = self.collectionView.frame.height
         let availableHeight = screenHeight - 20
