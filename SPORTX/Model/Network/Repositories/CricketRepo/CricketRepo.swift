@@ -1,31 +1,31 @@
 //
-//  BasketballRepo.swift
+//  CricketRepo.swift
 //  SPORTX
 //
 //  Created by Omar Abdelaziz on 15/05/2025.
 //
 
-class BasketballRepo: SportsRepoProtocol {
-    typealias LeagueType = BasketBallLeague
+class CricketRepo: SportsRepoProtocol {
+    typealias LeagueType = CricketLeague
 
-    typealias FixtureType = BasketBallFixture
+    typealias FixtureType = CricketFixture
 
-    typealias TeamOrPlayerType = BasketBallTeam
+    typealias TeamOrPlayerType = CricketTeam
 
     let networkManager: NetworkManagerProtocol
     init(networkManager: NetworkManagerProtocol) {
         self.networkManager = networkManager
     }
 
-    func getLeagues(completion: @escaping ([BasketBallLeague]?) -> Void
+    func getLeagues(completion: @escaping ([CricketLeague]?) -> Void
     ) {
         let params = [String: String]()
 
         networkManager.fetchData(
-            sport: .basketball,
+            sport: .cricket,
             met: .leagues,
             parameters: params,
-            responseType: BasketBallLeagueResponse.self
+            responseType: CricketLeagueResponse.self
         ) { res in
             if let res = res {
                 completion(res.result)
@@ -35,8 +35,8 @@ class BasketballRepo: SportsRepoProtocol {
         }
     }
 
-    func getFixtures(leagueId: Int, completion: @escaping ([BasketBallFixture]?) -> Void) {
-        let startEndDate = DatesGenerator.generateDates(numberOfDaysBefore: 20, numberOfDaysAfter: 20)
+    func getFixtures(leagueId: Int, completion: @escaping ([CricketFixture]?) -> Void) {
+        let startEndDate = DatesGenerator.generateDates(numberOfDaysBefore: 1000, numberOfDaysAfter: 100)
 
         let params = [
             "from": startEndDate.startDate,
@@ -46,10 +46,10 @@ class BasketballRepo: SportsRepoProtocol {
         ]
 
         networkManager.fetchData(
-            sport: .basketball,
+            sport: .cricket,
             met: .fixtures,
             parameters: params,
-            responseType: BasketBallFixtureResponse.self
+            responseType: CricketFixtureResponse.self
         ) { res in
             if let res = res {
                 completion(res.result)
@@ -59,15 +59,15 @@ class BasketballRepo: SportsRepoProtocol {
         }
     }
 
-    func getTeamsOrPlayers(leagueId: Int, completion: @escaping ([BasketBallTeam]?) -> Void) {
+    func getTeamsOrPlayers(leagueId: Int, completion: @escaping ([CricketTeam]?) -> Void) {
         let params = [
             "leagueId": "\(leagueId)",
         ]
         networkManager.fetchData(
-            sport: .basketball,
+            sport: .cricket,
             met: .teams,
             parameters: params,
-            responseType: BasketBallTeamResponse.self
+            responseType: CricketTeamResponse.self
         ) { res in
             if let res = res {
                 completion(res.result)
