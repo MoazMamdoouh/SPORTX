@@ -21,7 +21,7 @@ class SportsCollectionViewController: UICollectionViewController {
         super.viewDidLoad()
 
         setupView()
-        FootballRepo(networkManager: NetworkManager.shared).getFixtures(leagueId: 302) {  result in
+        BasketballRepo(networkManager: NetworkManager.shared).getFixtures(leagueId: 11325) { result in
             guard let result = result else {
                 return
             }
