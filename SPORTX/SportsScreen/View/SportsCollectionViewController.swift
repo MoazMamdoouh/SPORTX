@@ -11,21 +11,26 @@ private let reuseIdentifier = "SportsCollectionViewCell"
 
 class SportsCollectionViewController: UICollectionViewController {
     let sportsArray = [
-        SportModel(title: NSLocalizedString("football", comment: "football"), imageName: "football"),
-        SportModel(title: NSLocalizedString("basketball", comment: "basketball"), imageName: "basketball"),
-        SportModel(title: NSLocalizedString("cricket", comment: "cricket"), imageName: "cricket"),
-        SportModel(title: NSLocalizedString("tennis", comment: "tennis"), imageName: "tennis"),
+        SportModel(title: NSLocalizedString("football", comment: "football"), imageName: "football", type: .football),
+        SportModel(title: NSLocalizedString("basketball", comment: "basketball"), imageName: "basketball", type: .basketball),
+        SportModel(title: NSLocalizedString("cricket", comment: "cricket"), imageName: "cricket", type: .cricket),
+        SportModel(title: NSLocalizedString("tennis", comment: "tennis"), imageName: "tennis", type: .tennis),
     ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupView()
-        CricketRepo(networkManager: NetworkManager.shared).getTeamsOrPlayers(leagueId: 733){ result in
+        
+        (SportRepoFactory.makeRepo(for: .tennis) as? TennisRepo )?.getTeamsOrPlayers(leagueId: 2833) { result in
             guard let result = result else {
                 return
             }
             print(result)
+//            for i in 0...100{
+//                print("\(result[i].league_key)  \(result[i].league_name)")
+//
+//            }
         }
     }
 

@@ -7,6 +7,7 @@
 
 import Foundation
 struct SportModel {
-    var title: String
-    var imageName: String
+    let title: String
+    let imageName: String
+    let type: APIConstants.Sport
 }
