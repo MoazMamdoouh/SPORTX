@@ -14,7 +14,6 @@ protocol SplashPresenterProtocol {
 class SplashPresenter: SplashPresenterProtocol {
     func getNextScreen(storyboard: UIStoryboard) -> UIViewController {
         let isFirstLaunch = !UserDefaults.standard.bool(forKey: "hasLaunchedBefore")
-        print("\(isFirstLaunch)")
         if isFirstLaunch {
             // MARK: do after using onBoarding
 

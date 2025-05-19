@@ -44,7 +44,6 @@ class LeaguesTableViewController: UITableViewController, LeaguesViewProtocol {
         }
 
         let currentLeague = leaguesArray[indexPath.row]
-        print("\(currentLeague.leagueName) \(currentLeague.leagueImage)")
         cell.setData(imgStringURL: currentLeague.leagueImage, text: currentLeague.leagueName)
         return cell
     }
