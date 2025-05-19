@@ -9,10 +9,14 @@ import Lottie
 import UIKit
 
 class SplashViewController: UIViewController {
+    
     var animationView: LottieAnimationView?
+    var presenter : SplashPresenterProtocol?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLottie()
+        presenter = SplashPresenter()
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 4) { [weak self] in
             self?.navigateToNextScreen()
@@ -20,22 +24,11 @@ class SplashViewController: UIViewController {
     }
 
     private func navigateToNextScreen() {
-        let isFirstLaunch = !UserDefaults.standard.bool(forKey: "hasLaunchedBefore")
-        print(isFirstLaunch)
-        guard let myStoryboard = self.storyboard else { return }
-
-
-        let nextVC: UIViewController = myStoryboard.instantiateViewController(identifier: "Tabbar")
-
-        // MARK: do after using onBoarding
         
-//        if isFirstLaunch {
-//            UserDefaults.standard.set(true, forKey: "hasLaunchedBefore")
-//            nextVC = myStoryboard.instantiateViewController(identifier: "OnBoarding")
-//        } else {
-//            nextVC = myStoryboard.instantiateViewController(identifier: "Tabbar")
-//        }
+        guard let myStoryboard = self.storyboard, let presenter = presenter else { return }
 
+        let nextVC: UIViewController = presenter.getNextScreen(storyboard: myStoryboard)
+                
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
            let window = windowScene.windows.first {
             window.rootViewController = nextVC

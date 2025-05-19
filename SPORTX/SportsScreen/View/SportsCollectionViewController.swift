@@ -21,23 +21,12 @@ class SportsCollectionViewController: UICollectionViewController {
         super.viewDidLoad()
 
         setupView()
-        
-        (SportRepoFactory.makeRepo(for: .tennis) as? TennisRepo )?.getTeamsOrPlayers(leagueId: 2833) { result in
-            guard let result = result else {
-                return
-            }
-            print(result)
-//            for i in 0...100{
-//                print("\(result[i].league_key)  \(result[i].league_name)")
-//
-//            }
-        }
     }
 
     func setupView() {
         navigationItem.title = NSLocalizedString("sports", comment: "sports")
         let nib = UINib(nibName: "SportsCollectionViewCell", bundle: nil)
-        collectionView!.register(nib, forCellWithReuseIdentifier: reuseIdentifier)
+        collectionView.register(nib, forCellWithReuseIdentifier: reuseIdentifier)
 
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -45,7 +34,6 @@ class SportsCollectionViewController: UICollectionViewController {
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 60),
             collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -60),
-
         ])
     }
 
@@ -69,9 +57,14 @@ class SportsCollectionViewController: UICollectionViewController {
 
     // MARK: UICollectionViewDelegate
 
-//    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//
-//    }
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedSport = sportsArray[indexPath.row]
+        let storyboard = UIStoryboard(name: "Leagues", bundle: nil)
+        guard let leaguesVC = storyboard.instantiateViewController(withIdentifier: "leagues") as? LeaguesTableViewController else { return }
+        
+        leaguesVC.presenter = LeaguesPresenter(sportsType: selectedSport.type)
+        navigationController?.pushViewController(leaguesVC, animated: true)
+    }
 }
 
 extension SportsCollectionViewController: UICollectionViewDelegateFlowLayout {
