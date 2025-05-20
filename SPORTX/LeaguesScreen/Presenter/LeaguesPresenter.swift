@@ -5,10 +5,12 @@
 //  Created by Omar Abdelaziz on 19/05/2025.
 //
 
+import UIKit
+
 class LeaguesPresenter {
     var sportsType: APIConstants.Sport
     var view: LeaguesViewProtocol?
-    private var SportsRepo: any SportsRepoProtocol
+    private var SportsRepo: any SportRepoProtocol
 
     init(sportsType: APIConstants.Sport) {
         self.sportsType = sportsType
@@ -23,5 +25,9 @@ class LeaguesPresenter {
             }
             view?.updateData(leagues: newResult)
         }
+    }
+    
+    func setupFixturePresenter(leagueId: Int) -> FixturesPresenter{
+        return FixturesPresenter(sportsType: sportsType, SportsRepo: SportsRepo, leagueId: leagueId)
     }
 }

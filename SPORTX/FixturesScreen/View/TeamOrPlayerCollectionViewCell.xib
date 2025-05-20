@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TeamOrPlayerCollectionViewCell" id="gTV-IL-0wX" customClass="TeamOrPlayerCollectionViewCell" customModule="SPORTX" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="325" height="260"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="325" height="260"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GNc-ib-S6x">
+                        <rect key="frame" x="48.666666666666671" y="10" width="227.66666666666663" height="182"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jco-Ki-ZgX">
+                        <rect key="frame" x="10" y="219" width="305" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="GNc-ib-S6x" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" multiplier="0.7" id="H4k-hK-m0v"/>
+                <constraint firstItem="ZTg-uK-7eu" firstAttribute="trailing" secondItem="Jco-Ki-ZgX" secondAttribute="trailing" constant="10" id="KBJ-1w-6IE"/>
+                <constraint firstItem="GNc-ib-S6x" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="width" multiplier="0.7" id="ahP-zY-Xs2"/>
+                <constraint firstItem="GNc-ib-S6x" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="fFY-yM-lzt"/>
+                <constraint firstItem="GNc-ib-S6x" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="fXL-qW-0mU"/>
+                <constraint firstItem="Jco-Ki-ZgX" firstAttribute="top" secondItem="GNc-ib-S6x" secondAttribute="bottom" constant="27" id="k5w-i7-1tN"/>
+                <constraint firstItem="Jco-Ki-ZgX" firstAttribute="leading" secondItem="ZTg-uK-7eu" secondAttribute="leading" constant="10" id="kzW-KW-xhx"/>
+            </constraints>
+            <size key="customSize" width="325" height="260"/>
+            <connections>
+                <outlet property="teamOrPlayerImageView" destination="GNc-ib-S6x" id="fTX-eC-dZA"/>
+                <outlet property="teamOrPlayerName" destination="Jco-Ki-ZgX" id="zxL-Si-qem"/>
+            </connections>
+            <point key="canvasLocation" x="162.59541984732823" y="92.957746478873247"/>
+        </collectionViewCell>
+    </objects>
+</document>

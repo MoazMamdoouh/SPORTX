@@ -12,27 +12,22 @@ protocol SplashPresenterProtocol {
 }
 
 class SplashPresenter: SplashPresenterProtocol {
+    static let hasLaunchedBeforeKey = "hasLaunchedBefore"
     func getNextScreen(storyboard: UIStoryboard) -> UIViewController {
-        let isFirstLaunch = !UserDefaults.standard.bool(forKey: "hasLaunchedBefore")
+        let isFirstLaunch = !UserDefaults.standard.bool(forKey: SplashPresenter.hasLaunchedBeforeKey)
         if isFirstLaunch {
             // MARK: do after using onBoarding
 
-            UserDefaults.standard.set(true, forKey: "hasLaunchedBefore")
+            UserDefaults.standard.set(true, forKey: SplashPresenter.hasLaunchedBeforeKey)
 //            nextVC = myStoryboard.instantiateViewController(identifier: "OnBoarding")
             let nextVC = storyboard.instantiateViewController(identifier: "Tabbar")
 
             return nextVC
         } else {
-            let tabBarController = storyboard.instantiateViewController(identifier: "Tabbar") as! UITabBarController
+            guard let tabBarController = storyboard.instantiateViewController(identifier: "Tabbar") as? UITabBarController else { return UIViewController() }
             _ = tabBarController.view
 
-            let userInterfaceStyle = UITraitCollection.current.userInterfaceStyle
-
-            if userInterfaceStyle == .dark {
-                UITabBarItem.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
-            } else {
-                UITabBarItem.appearance().setTitleTextAttributes([.foregroundColor: UIColor.black], for: .selected)
-            }
+            UITabBarItem.appearance().setTitleTextAttributes([.foregroundColor: UIColor(resource: .blackwhitecolor)], for: .selected)
 
             if let tabBarItems = tabBarController.tabBar.items {
                 tabBarItems[0].title = NSLocalizedString("home", comment: "home")

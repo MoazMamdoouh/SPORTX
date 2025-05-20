@@ -5,7 +5,7 @@
 //  Created by Omar Abdelaziz on 16/05/2025.
 //
 
-protocol SportsRepoProtocol {
+protocol SportRepoProtocol {
     associatedtype LeagueType: Decodable
     associatedtype FixtureType: Decodable
     associatedtype TeamOrPlayerType: Decodable

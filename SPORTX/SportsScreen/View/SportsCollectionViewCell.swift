@@ -9,8 +9,8 @@ import Kingfisher
 import UIKit
 
 class SportsCollectionViewCell: UICollectionViewCell {
-    @IBOutlet var cellLabel: UILabel!
-    @IBOutlet var cellImageView: UIImageView!
+    @IBOutlet private var cellLabel: UILabel!
+    @IBOutlet private var cellImageView: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         cellImageView.contentMode = .scaleAspectFill

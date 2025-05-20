@@ -5,7 +5,7 @@
 //  Created by Omar Abdelaziz on 15/05/2025.
 //
 
-class CricketRepo: SportsRepoProtocol {
+class CricketRepo: SportRepoProtocol {
     typealias LeagueType = CricketLeague
 
     typealias FixtureType = CricketFixture

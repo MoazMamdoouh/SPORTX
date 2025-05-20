@@ -5,7 +5,7 @@
 //  Created by Omar Abdelaziz on 15/05/2025.
 //
 
-class FootballRepo: SportsRepoProtocol {
+class FootballRepo: SportRepoProtocol {
     typealias LeagueType = FootballLeague
 
     typealias FixtureType = FootballFixture

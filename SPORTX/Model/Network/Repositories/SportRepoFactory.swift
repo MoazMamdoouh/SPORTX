@@ -6,7 +6,7 @@
 //
 
 enum SportRepoFactory {
-    static func makeRepo(for sport: APIConstants.Sport, withNetworkManager networkManager: NetworkManagerProtocol = NetworkManager.shared) -> any SportsRepoProtocol {
+    static func makeRepo(for sport: APIConstants.Sport, withNetworkManager networkManager: NetworkManagerProtocol = NetworkManager.shared) -> any SportRepoProtocol {
         switch sport {
         case .football:
             return FootballRepo(networkManager: networkManager)

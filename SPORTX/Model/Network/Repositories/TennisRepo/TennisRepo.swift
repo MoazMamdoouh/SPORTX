@@ -5,7 +5,7 @@
 //  Created by Omar Abdelaziz on 15/05/2025.
 //
 
-class TennisRepo: SportsRepoProtocol {
+class TennisRepo: SportRepoProtocol {
     typealias LeagueType = TennisLeague
 
     typealias FixtureType = TennisFixture

@@ -58,6 +58,7 @@
 		1FDEEA1F2DDA4A8D00E98D34 /* SplashScreen */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = SplashScreen; sourceTree = "<group>"; };
 		1FDEEA252DDA72CD00E98D34 /* view */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = view; sourceTree = "<group>"; };
 		1FDEEA262DDB640A00E98D34 /* LeaguesScreen */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = LeaguesScreen; sourceTree = "<group>"; };
+		1FDEEA5E2DDBDEE000E98D34 /* FixturesScreen */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = FixturesScreen; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +113,7 @@
 		22383C702DD3CD0900D5362C /* SPORTX */ = {
 			isa = PBXGroup;
 			children = (
+				1FDEEA5E2DDBDEE000E98D34 /* FixturesScreen */,
 				1FDEEA262DDB640A00E98D34 /* LeaguesScreen */,
 				1FDEEA252DDA72CD00E98D34 /* view */,
 				1FDEEA1F2DDA4A8D00E98D34 /* SplashScreen */,
@@ -167,6 +169,7 @@
 				1FDEEA1F2DDA4A8D00E98D34 /* SplashScreen */,
 				1FDEEA252DDA72CD00E98D34 /* view */,
 				1FDEEA262DDB640A00E98D34 /* LeaguesScreen */,
+				1FDEEA5E2DDBDEE000E98D34 /* FixturesScreen */,
 			);
 			name = SPORTX;
 			packageProductDependencies = (

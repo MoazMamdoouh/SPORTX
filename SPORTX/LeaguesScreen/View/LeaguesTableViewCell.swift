@@ -21,9 +21,8 @@ class LeaguesTableViewCell: UITableViewCell {
         imgView.layer.cornerRadius = imgView.bounds.width / 2
         imgView.clipsToBounds = true
         borderView.layer.borderWidth = 2
-        borderView.layer.borderColor = UIColor.black.cgColor
+        borderView.layer.borderColor = UIColor(resource: .blackwhitecolor).cgColor
         borderView.layer.cornerRadius = 12
-        // Initialization code
     }
     
     func setData(imgStringURL: String, text: String) {

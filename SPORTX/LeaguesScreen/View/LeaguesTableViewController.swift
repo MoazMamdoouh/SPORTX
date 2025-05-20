@@ -16,10 +16,10 @@ class LeaguesTableViewController: UITableViewController, LeaguesViewProtocol {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupView()
         guard let presenter = presenter else { return }
         presenter.view = self
         presenter.getData()
-        setupView()
     }
 
     func setupView() {
@@ -53,10 +53,20 @@ class LeaguesTableViewController: UITableViewController, LeaguesViewProtocol {
         return height / 8
     }
 
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let currentLeague = leaguesArray[indexPath.row]
+        let storyboard = UIStoryboard(name: "Fixtures", bundle: nil)
+        guard let fixturesVC = storyboard.instantiateViewController(withIdentifier: "Fixtures") as? FixturesCollectionViewController else { return }
+        
+        fixturesVC.presenter = presenter?.setupFixturePresenter(leagueId: currentLeague.leagueKey)
+        navigationController?.pushViewController(fixturesVC, animated: true)
+    }
     func updateData(leagues: [League]) {
         leaguesArray = leagues
         tableView.reloadData()
     }
+    
+    
 
 }
 

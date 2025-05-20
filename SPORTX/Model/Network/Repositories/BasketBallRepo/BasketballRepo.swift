@@ -5,7 +5,7 @@
 //  Created by Omar Abdelaziz on 15/05/2025.
 //
 
-class BasketballRepo: SportsRepoProtocol {
+class BasketballRepo: SportRepoProtocol {
     typealias LeagueType = BasketBallLeague
 
     typealias FixtureType = BasketBallFixture
