@@ -31,7 +31,7 @@ class FavoriteTableViewController: UITableViewController {
     
     
     func setupView() {
-        navigationItem.title = NSLocalizedString("leagues", comment: "leagues")
+        navigationItem.title = NSLocalizedString("favorite", comment: "favorite")
         let nib = UINib(nibName: "LeaguesTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: reuseIdentifier)
     }
