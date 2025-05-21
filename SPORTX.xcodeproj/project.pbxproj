@@ -15,6 +15,7 @@
 		1F9683E92DD552E2006E981B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F9683E82DD552E2006E981B /* Assets.xcassets */; };
 		1FDEEA1C2DDA0B8E00E98D34 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 1FDEEA1B2DDA0B8E00E98D34 /* Lottie */; };
 		1FDEEC262DDE2A7900E98D34 /* SPORTX.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1FDEEC242DDE2A7900E98D34 /* SPORTX.xcdatamodeld */; };
+		1FDEED832DDE81B000E98D34 /* NetworkManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDEED822DDE81B000E98D34 /* NetworkManagerTests.swift */; };
 		22383C8C2DD3CD0C00D5362C /* SPORTXTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22383C8B2DD3CD0C00D5362C /* SPORTXTests.swift */; };
 		22383C962DD3CD0C00D5362C /* SPORTXUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22383C952DD3CD0C00D5362C /* SPORTXUITests.swift */; };
 		22383C982DD3CD0C00D5362C /* SPORTXUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22383C972DD3CD0C00D5362C /* SPORTXUITestsLaunchTests.swift */; };
@@ -48,6 +49,7 @@
 		1F9683E72DD54E83006E981B /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1F9683E82DD552E2006E981B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1FDEEC252DDE2A7900E98D34 /* SPORTX.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SPORTX.xcdatamodel; sourceTree = "<group>"; };
+		1FDEED822DDE81B000E98D34 /* NetworkManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerTests.swift; sourceTree = "<group>"; };
 		22383C6E2DD3CD0900D5362C /* SPORTX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SPORTX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22383C822DD3CD0B00D5362C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22383C872DD3CD0C00D5362C /* SPORTXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SPORTXTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -60,6 +62,7 @@
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		0AD18E172DDE341500A1B1C0 /* view */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = view; sourceTree = "<group>"; };
 		1F2C65C32DD7DE1600BD9208 /* Utilities */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Utilities; sourceTree = "<group>"; };
+		1F6F5A1B2DDE8836002CB896 /* RepoTestWithMocking */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = RepoTestWithMocking; sourceTree = "<group>"; };
 		1F9683D52DD5375F006E981B /* App */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = App; sourceTree = "<group>"; };
 		1F9683D62DD5378B006E981B /* SportsScreen */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = SportsScreen; sourceTree = "<group>"; };
 		1F9683DE2DD53827006E981B /* Model */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Model; sourceTree = "<group>"; };
@@ -162,7 +165,9 @@
 		22383C8A2DD3CD0C00D5362C /* SPORTXTests */ = {
 			isa = PBXGroup;
 			children = (
+				1F6F5A1B2DDE8836002CB896 /* RepoTestWithMocking */,
 				22383C8B2DD3CD0C00D5362C /* SPORTXTests.swift */,
+				1FDEED822DDE81B000E98D34 /* NetworkManagerTests.swift */,
 			);
 			path = SPORTXTests;
 			sourceTree = "<group>";
@@ -225,6 +230,9 @@
 			);
 			dependencies = (
 				22383C892DD3CD0C00D5362C /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				1F6F5A1B2DDE8836002CB896 /* RepoTestWithMocking */,
 			);
 			name = SPORTXTests;
 			productName = SPORTXTests;
@@ -341,6 +349,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FDEED832DDE81B000E98D34 /* NetworkManagerTests.swift in Sources */,
 				22383C8C2DD3CD0C00D5362C /* SPORTXTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
