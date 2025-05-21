@@ -26,6 +26,8 @@ class FixturesCollectionViewController: UICollectionViewController, FixtureViewP
         presenter.view = self
         presenter.getData()
     }
+    
+    
 
     func setupView() {
         navigationItem.title = NSLocalizedString("fixtures", comment: "fixtures")
@@ -48,9 +50,12 @@ class FixturesCollectionViewController: UICollectionViewController, FixtureViewP
                 return self?.drawTeamsOrPlayerSection()
             }
         }
+        
 
         collectionView.setCollectionViewLayout(layout, animated: true)
     }
+    
+    
 
     func drawHorizontalUpcomingMatchesSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
@@ -87,6 +92,7 @@ class FixturesCollectionViewController: UICollectionViewController, FixtureViewP
         return section
     }
 
+    
     func drawVerticalLatestMatchesSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
@@ -123,6 +129,8 @@ class FixturesCollectionViewController: UICollectionViewController, FixtureViewP
 
         return section
     }
+    
+    
 
     func drawTeamsOrPlayerSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
@@ -173,7 +181,7 @@ class FixturesCollectionViewController: UICollectionViewController, FixtureViewP
 
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard kind == UICollectionView.elementKindSectionHeader else {
-            print("stopped here")
+           // print("stopped here")
             return UICollectionReusableView()
         }
 
@@ -249,4 +257,7 @@ class FixturesCollectionViewController: UICollectionViewController, FixtureViewP
             print(TeamsOrPlayersArray[indexPath.row].name)
         }
     }
+    
+    
+    
 }

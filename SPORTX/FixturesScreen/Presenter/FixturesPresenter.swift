@@ -10,11 +10,13 @@ class FixturesPresenter {
     var sportsType: APIConstants.Sport
     var SportsRepo: any SportRepoProtocol
     var leagueId: Int
+    var coredataRepo : CoreDataRepo
 
-    init(sportsType: APIConstants.Sport, SportsRepo: any SportRepoProtocol, leagueId: Int) {
+    init(sportsType: APIConstants.Sport, SportsRepo: any SportRepoProtocol, leagueId: Int , coreDataRepo : CoreDataRepo) {
         self.sportsType = sportsType
         self.SportsRepo = SportsRepo
         self.leagueId = leagueId
+        self.coredataRepo = coreDataRepo
     }
 
     func getData() {
@@ -49,5 +51,9 @@ class FixturesPresenter {
             }
             view?.updateData(teamOrPlayer: newResult)
         }
+    }
+    
+    func saveLeagueToFavorite(leagueId: Int32, leagueName: String, leagueImage: String, leagueType: String){
+        coredataRepo.saveLeagueToFavorite(leagueId: leagueId, leagueName: leagueName, leagueImage: leagueImage, leagueType: leagueType)
     }
 }

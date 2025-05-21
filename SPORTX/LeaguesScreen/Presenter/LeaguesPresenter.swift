@@ -28,6 +28,6 @@ class LeaguesPresenter {
     }
     
     func setupFixturePresenter(leagueId: Int) -> FixturesPresenter{
-        return FixturesPresenter(sportsType: sportsType, SportsRepo: SportsRepo, leagueId: leagueId)
+        return FixturesPresenter(sportsType: sportsType, SportsRepo: SportsRepo, leagueId: leagueId, coreDataRepo: CoreDataRepoImpl.shared)
     }
 }
