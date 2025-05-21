@@ -11,14 +11,14 @@ class DetailsViewController: UIViewController, UITableViewDataSource, UITableVie
     var TeamOrPlayer: TeamOrPlayer?
     var sportType: APIConstants.Sport?
     
-    @IBOutlet weak var teamOrPlayerImgView: UIImageView!
+    @IBOutlet private weak var teamOrPlayerImgView: UIImageView!
     
-    @IBOutlet weak var teamOrPlayerName: UILabel!
+    @IBOutlet private weak var teamOrPlayerName: UILabel!
     
 
-    @IBOutlet var tableView: UITableView!
-    @IBOutlet var coachOrCountryName: UILabel!
-    @IBOutlet var coachOrCountryLabel: UILabel!
+    @IBOutlet private var tableView: UITableView!
+    @IBOutlet private var coachOrCountryName: UILabel!
+    @IBOutlet private var coachOrCountryLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
@@ -48,6 +48,7 @@ class DetailsViewController: UIViewController, UITableViewDataSource, UITableVie
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(TeamOrPlayer?.players?.count)
         return TeamOrPlayer?.players?.count ?? 0
     }
 
@@ -57,5 +58,9 @@ class DetailsViewController: UIViewController, UITableViewDataSource, UITableVie
             cell.setData(imgStringUrl: player.image ?? "", playerName: player.name, playerNumber: player.number)
         }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 70
     }
 }

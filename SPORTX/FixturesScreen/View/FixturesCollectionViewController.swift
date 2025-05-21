@@ -15,10 +15,9 @@ class FixturesCollectionViewController: UICollectionViewController, FixtureViewP
     var upcomingMatchesArray = [Fixture]()
     var latestMatchesArray = [Fixture]()
     var TeamsOrPlayersArray = [TeamOrPlayer]()
-
     var presenter: FixturesPresenter?
-    
-    var isFavorite : Bool?
+
+    var isFavorite: Bool?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,23 +26,21 @@ class FixturesCollectionViewController: UICollectionViewController, FixtureViewP
         guard let presenter else { return }
         presenter.view = self
         presenter.getData()
-        
-        isFavorite = presenter.cheackIfLeagueExistInCoreData()
+
+        isFavorite = presenter.checkIfLeagueExistInCoreData()
         updateFavoriteButtonIcon()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
-        isFavorite = presenter?.cheackIfLeagueExistInCoreData()
+        isFavorite = presenter?.checkIfLeagueExistInCoreData()
         updateFavoriteButtonIcon()
     }
-    
 
     func setupView() {
-        
-        let heartImage =  UIImage(systemName: isFavorite ?? false ? "heart.fill" : "heart")
+        let heartImage = UIImage(systemName: isFavorite ?? false ? "heart.fill" : "heart")
         let favoriteButton = UIBarButtonItem(image: heartImage, style: .plain, target: self, action: #selector(favoriteButtonTapped))
         navigationItem.rightBarButtonItem = favoriteButton
-        
+
         navigationItem.title = NSLocalizedString("fixtures", comment: "fixtures")
         let fixtureCellNib = UINib(nibName: "FixtureCollectionViewCell", bundle: nil)
         let teamOrPlayerCellNib = UINib(nibName: "TeamOrPlayerCollectionViewCell", bundle: nil)
@@ -64,12 +61,9 @@ class FixturesCollectionViewController: UICollectionViewController, FixtureViewP
                 return self?.drawTeamsOrPlayerSection()
             }
         }
-        
 
         collectionView.setCollectionViewLayout(layout, animated: true)
     }
-    
-    
 
     func drawHorizontalUpcomingMatchesSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
@@ -106,7 +100,6 @@ class FixturesCollectionViewController: UICollectionViewController, FixtureViewP
         return section
     }
 
-    
     func drawVerticalLatestMatchesSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
@@ -143,8 +136,6 @@ class FixturesCollectionViewController: UICollectionViewController, FixtureViewP
 
         return section
     }
-    
-    
 
     func drawTeamsOrPlayerSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
@@ -195,7 +186,7 @@ class FixturesCollectionViewController: UICollectionViewController, FixtureViewP
 
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard kind == UICollectionView.elementKindSectionHeader else {
-           // print("stopped here")
+            // print("stopped here")
             return UICollectionReusableView()
         }
 
@@ -268,10 +259,16 @@ class FixturesCollectionViewController: UICollectionViewController, FixtureViewP
 
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section == 2 {
-            print(TeamsOrPlayersArray[indexPath.row].name)
+            let storyboard = UIStoryboard(name: "Details", bundle: nil)
+            guard let detailsVC = storyboard.instantiateViewController(withIdentifier: "DetailsViewController") as? DetailsViewController else { return }
+                
+            detailsVC.TeamOrPlayer = TeamsOrPlayersArray[indexPath.row]
+            detailsVC.sportType = presenter?.sportsType
+            navigationController?.pushViewController(detailsVC, animated: true)
+            print(TeamsOrPlayersArray[indexPath.row].players)
         }
     }
-    
+
     @objc func favoriteButtonTapped() {
         guard let presenter else { return }
 
@@ -308,5 +305,4 @@ class FixturesCollectionViewController: UICollectionViewController, FixtureViewP
 
         present(alert, animated: true, completion: nil)
     }
-    
 }

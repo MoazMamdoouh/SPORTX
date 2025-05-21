@@ -61,7 +61,7 @@ class FixturesPresenter {
         }
     }
     
-    func cheackIfLeagueExistInCoreData() -> Bool{
+    func checkIfLeagueExistInCoreData() -> Bool{
         if coredataRepo == nil {
             coredataRepo = CoreDataRepoImpl.shared
         }

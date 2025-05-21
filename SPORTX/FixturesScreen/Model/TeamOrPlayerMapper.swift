@@ -34,7 +34,8 @@ struct TeamOrPlayerMapper {
     private static func MapFromFootballTeam(footballTeam: FootballTeam) -> TeamOrPlayer {
         var players: [Player] = []
         for player in footballTeam.players {
-            let player = Player(name: player.player_name, number: player.player_number, image: player.player_image ?? "")
+            let tempPlayer = Player(name: player.player_name, number: player.player_number, image: player.player_image ?? "")
+            players.append(tempPlayer)
         }
         let coach = Coach(name: footballTeam.coaches[0].coach_name)
         return TeamOrPlayer(key: footballTeam.team_key,
