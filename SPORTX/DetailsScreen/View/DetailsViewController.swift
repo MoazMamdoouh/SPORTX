@@ -23,6 +23,7 @@ class DetailsViewController: UIViewController, UITableViewDataSource, UITableVie
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        
         guard let TeamOrPlayer = TeamOrPlayer, let sportType = sportType else { return }
         
         teamOrPlayerImgView.kf.setImage(with: URL(string: TeamOrPlayer.image), placeholder: UIImage(named: "sportx_logo"))
@@ -30,9 +31,13 @@ class DetailsViewController: UIViewController, UITableViewDataSource, UITableVie
         teamOrPlayerName.text = TeamOrPlayer.name
         
         if sportType == .tennis {
-            coachOrCountryLabel.text = "Country: "
+            navigationItem.title = NSLocalizedString("player details", comment: "player details")
+
+            coachOrCountryLabel.text = NSLocalizedString("country", comment: "country")
         } else {
-            coachOrCountryLabel.text = "Coach: "
+            navigationItem.title = NSLocalizedString("team details", comment: "player details")
+            coachOrCountryLabel.text = NSLocalizedString("coach", comment: "coach")
+
         }
         
         coachOrCountryName.text = (TeamOrPlayer.coachOrCountry?.name) ?? ""
