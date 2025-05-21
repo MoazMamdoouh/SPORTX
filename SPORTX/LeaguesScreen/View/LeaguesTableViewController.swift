@@ -35,6 +35,7 @@ class LeaguesTableViewController: UITableViewController, LeaguesViewProtocol {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    
         return leaguesArray.count
     }
 
@@ -58,7 +59,7 @@ class LeaguesTableViewController: UITableViewController, LeaguesViewProtocol {
         let storyboard = UIStoryboard(name: "Fixtures", bundle: nil)
         guard let fixturesVC = storyboard.instantiateViewController(withIdentifier: "Fixtures") as? FixturesCollectionViewController else { return }
         
-        fixturesVC.presenter = presenter?.setupFixturePresenter(leagueId: currentLeague.leagueKey)
+        fixturesVC.presenter = presenter?.setupFixturePresenter(league: currentLeague)
         navigationController?.pushViewController(fixturesVC, animated: true)
     }
     func updateData(leagues: [League]) {

@@ -9,12 +9,13 @@ class FixturesPresenter {
     var view: FixtureViewProtocol?
     var sportsType: APIConstants.Sport
     var SportsRepo: any SportRepoProtocol
-    var leagueId: Int
+    var league : League
+    private var coredataRepo : CoreDataRepo?
 
-    init(sportsType: APIConstants.Sport, SportsRepo: any SportRepoProtocol, leagueId: Int) {
+    init(sportsType: APIConstants.Sport, SportsRepo: any SportRepoProtocol, league : League ) {
         self.sportsType = sportsType
         self.SportsRepo = SportsRepo
-        self.leagueId = leagueId
+        self.league = league
     }
 
     func getData() {
@@ -23,7 +24,7 @@ class FixturesPresenter {
     }
 
     private func getFixtures() {
-        SportsRepo.getFixtures(leagueId: leagueId) { [weak self] result in
+        SportsRepo.getFixtures(leagueId: league.leagueKey) { [weak self] result in
             guard let result = result, let self = self else { return }
             let newResult = result.compactMap {
                 FixtureMapper.MapToFixture(forSport: self.sportsType, fixture: $0)
@@ -42,12 +43,40 @@ class FixturesPresenter {
     }
 
     private func getTeamsOrPlayers() {
-        SportsRepo.getTeamsOrPlayers(leagueId: leagueId) { [weak self] result in
+        SportsRepo.getTeamsOrPlayers(leagueId: league.leagueKey) { [weak self] result in
             guard let result = result, let self = self else { return }
             let newResult = result.compactMap {
                 TeamOrPlayerMapper.MapToTeamOrPlayer(forSport: self.sportsType, teamOrPlayer: $0)
             }
             view?.updateData(teamOrPlayer: newResult)
+        }
+    }
+    
+    func saveLeagueToFavorite(){
+        if coredataRepo == nil {
+            coredataRepo = CoreDataRepoImpl.shared
+        }
+        if let coredataRepo {
+            coredataRepo.saveLeagueToFavorite(leagueId: Int32(league.leagueKey), leagueName: league.leagueName, leagueImage: league.leagueImage, leagueType: sportsType.rawValue)
+        }
+    }
+    
+    func cheackIfLeagueExistInCoreData() -> Bool{
+        if coredataRepo == nil {
+            coredataRepo = CoreDataRepoImpl.shared
+        }
+        if let coredataRepo {
+            return  coredataRepo.checkLeagueInCoreData(leagueId: Int32(league.leagueKey))
+        }
+        return false
+    }
+    
+    func deleteLeague(){
+        if coredataRepo == nil {
+            coredataRepo = CoreDataRepoImpl.shared
+        }
+        if let coredataRepo {
+            coredataRepo.deleteLeague(leagueId: Int32(league.leagueKey))
         }
     }
 }

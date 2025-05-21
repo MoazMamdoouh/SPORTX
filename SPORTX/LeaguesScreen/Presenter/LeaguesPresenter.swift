@@ -27,7 +27,7 @@ class LeaguesPresenter {
         }
     }
     
-    func setupFixturePresenter(leagueId: Int) -> FixturesPresenter{
-        return FixturesPresenter(sportsType: sportsType, SportsRepo: SportsRepo, leagueId: leagueId)
+    func setupFixturePresenter(league : League) -> FixturesPresenter{
+        return FixturesPresenter(sportsType: sportsType, SportsRepo: SportsRepo, league : league)
     }
 }

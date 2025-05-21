@@ -17,6 +17,8 @@ class FixturesCollectionViewController: UICollectionViewController, FixtureViewP
     var TeamsOrPlayersArray = [TeamOrPlayer]()
 
     var presenter: FixturesPresenter?
+    
+    var isFavorite : Bool?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,9 +27,23 @@ class FixturesCollectionViewController: UICollectionViewController, FixtureViewP
         guard let presenter else { return }
         presenter.view = self
         presenter.getData()
+        
+        isFavorite = presenter.cheackIfLeagueExistInCoreData()
+        updateFavoriteButtonIcon()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        isFavorite = presenter?.cheackIfLeagueExistInCoreData()
+        updateFavoriteButtonIcon()
+    }
+    
 
     func setupView() {
+        
+        let heartImage =  UIImage(systemName: isFavorite ?? false ? "heart.fill" : "heart")
+        let favoriteButton = UIBarButtonItem(image: heartImage, style: .plain, target: self, action: #selector(favoriteButtonTapped))
+        navigationItem.rightBarButtonItem = favoriteButton
+        
         navigationItem.title = NSLocalizedString("fixtures", comment: "fixtures")
         let fixtureCellNib = UINib(nibName: "FixtureCollectionViewCell", bundle: nil)
         let teamOrPlayerCellNib = UINib(nibName: "TeamOrPlayerCollectionViewCell", bundle: nil)
@@ -48,9 +64,12 @@ class FixturesCollectionViewController: UICollectionViewController, FixtureViewP
                 return self?.drawTeamsOrPlayerSection()
             }
         }
+        
 
         collectionView.setCollectionViewLayout(layout, animated: true)
     }
+    
+    
 
     func drawHorizontalUpcomingMatchesSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
@@ -87,6 +106,7 @@ class FixturesCollectionViewController: UICollectionViewController, FixtureViewP
         return section
     }
 
+    
     func drawVerticalLatestMatchesSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
@@ -123,6 +143,8 @@ class FixturesCollectionViewController: UICollectionViewController, FixtureViewP
 
         return section
     }
+    
+    
 
     func drawTeamsOrPlayerSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
@@ -173,7 +195,7 @@ class FixturesCollectionViewController: UICollectionViewController, FixtureViewP
 
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard kind == UICollectionView.elementKindSectionHeader else {
-            print("stopped here")
+           // print("stopped here")
             return UICollectionReusableView()
         }
 
@@ -249,4 +271,42 @@ class FixturesCollectionViewController: UICollectionViewController, FixtureViewP
             print(TeamsOrPlayersArray[indexPath.row].name)
         }
     }
+    
+    @objc func favoriteButtonTapped() {
+        guard let presenter else { return }
+
+        if isFavorite == true {
+            deleteLeagueDialogConfermation()
+        } else {
+            presenter.saveLeagueToFavorite()
+            isFavorite?.toggle()
+            updateFavoriteButtonIcon()
+            print("League added to favorites.")
+        }
+    }
+
+    func updateFavoriteButtonIcon() {
+        let heartImage = UIImage(systemName: isFavorite ?? false ? "heart.fill" : "heart")
+        navigationItem.rightBarButtonItem?.image = heartImage
+    }
+
+    private func deleteLeagueDialogConfermation() {
+        let alert = UIAlertController(
+            title: "Delete League",
+            message: "Are you sure you want to remove this league from favorites?",
+            preferredStyle: .alert
+        )
+
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+
+        alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
+            self.presenter?.deleteLeague()
+            self.isFavorite?.toggle()
+            self.updateFavoriteButtonIcon()
+            print("League removed from favorites.")
+        }))
+
+        present(alert, animated: true, completion: nil)
+    }
+    
 }

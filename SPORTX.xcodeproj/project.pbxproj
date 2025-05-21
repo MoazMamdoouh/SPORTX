@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0AD18E152DDE2B9300A1B1C0 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 0AD18E142DDE2B9300A1B1C0 /* Config.xcconfig */; };
+		0AD18E1C2DDE349700A1B1C0 /* FavoritePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD18E1B2DDE349700A1B1C0 /* FavoritePresenter.swift */; };
+		0AD18E272DDE381700A1B1C0 /* FavoritesModel+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD18E252DDE381700A1B1C0 /* FavoritesModel+CoreDataClass.swift */; };
+		0AD18E282DDE381700A1B1C0 /* FavoritesModel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD18E262DDE381700A1B1C0 /* FavoritesModel+CoreDataProperties.swift */; };
 		1F9683E52DD54E11006E981B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1F9683E32DD54E11006E981B /* Localizable.strings */; };
 		1F9683E92DD552E2006E981B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F9683E82DD552E2006E981B /* Assets.xcassets */; };
 		1FDEEA1C2DDA0B8E00E98D34 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 1FDEEA1B2DDA0B8E00E98D34 /* Lottie */; };
@@ -36,10 +40,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0AD18E142DDE2B9300A1B1C0 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		0AD18E1B2DDE349700A1B1C0 /* FavoritePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePresenter.swift; sourceTree = "<group>"; };
+		0AD18E252DDE381700A1B1C0 /* FavoritesModel+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoritesModel+CoreDataClass.swift"; sourceTree = "<group>"; };
+		0AD18E262DDE381700A1B1C0 /* FavoritesModel+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoritesModel+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1F9683E42DD54E11006E981B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1F9683E72DD54E83006E981B /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1F9683E82DD552E2006E981B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		1F9684772DD682E4006E981B /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		1FDEEC252DDE2A7900E98D34 /* SPORTX.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SPORTX.xcdatamodel; sourceTree = "<group>"; };
 		22383C6E2DD3CD0900D5362C /* SPORTX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SPORTX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22383C822DD3CD0B00D5362C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -51,6 +58,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		0AD18E172DDE341500A1B1C0 /* view */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = view; sourceTree = "<group>"; };
 		1F2C65C32DD7DE1600BD9208 /* Utilities */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Utilities; sourceTree = "<group>"; };
 		1F9683D52DD5375F006E981B /* App */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = App; sourceTree = "<group>"; };
 		1F9683D62DD5378B006E981B /* SportsScreen */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = SportsScreen; sourceTree = "<group>"; };
@@ -90,10 +98,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0AD18E162DDE33ED00A1B1C0 /* FavoriteScreen */ = {
+			isa = PBXGroup;
+			children = (
+				0AD18E1A2DDE347D00A1B1C0 /* presenter */,
+				0AD18E172DDE341500A1B1C0 /* view */,
+			);
+			path = FavoriteScreen;
+			sourceTree = "<group>";
+		};
+		0AD18E1A2DDE347D00A1B1C0 /* presenter */ = {
+			isa = PBXGroup;
+			children = (
+				0AD18E1B2DDE349700A1B1C0 /* FavoritePresenter.swift */,
+			);
+			path = presenter;
+			sourceTree = "<group>";
+		};
 		22383C652DD3CD0900D5362C = {
 			isa = PBXGroup;
 			children = (
-				1F9684772DD682E4006E981B /* Config.xcconfig */,
+				0AD18E252DDE381700A1B1C0 /* FavoritesModel+CoreDataClass.swift */,
+				0AD18E262DDE381700A1B1C0 /* FavoritesModel+CoreDataProperties.swift */,
+				0AD18E142DDE2B9300A1B1C0 /* Config.xcconfig */,
 				22383C702DD3CD0900D5362C /* SPORTX */,
 				22383C8A2DD3CD0C00D5362C /* SPORTXTests */,
 				22383C942DD3CD0C00D5362C /* SPORTXUITests */,
@@ -114,6 +141,7 @@
 		22383C702DD3CD0900D5362C /* SPORTX */ = {
 			isa = PBXGroup;
 			children = (
+				0AD18E162DDE33ED00A1B1C0 /* FavoriteScreen */,
 				1FDEEC272DDE2F4300E98D34 /* DetailsScreen */,
 				1FDEEA5E2DDBDEE000E98D34 /* FixturesScreen */,
 				1FDEEA262DDB640A00E98D34 /* LeaguesScreen */,
@@ -164,6 +192,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				0AD18E172DDE341500A1B1C0 /* view */,
 				1F2C65C32DD7DE1600BD9208 /* Utilities */,
 				1F9683D52DD5375F006E981B /* App */,
 				1F9683D62DD5378B006E981B /* SportsScreen */,
@@ -275,6 +304,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F9683E52DD54E11006E981B /* Localizable.strings in Resources */,
+				0AD18E152DDE2B9300A1B1C0 /* Config.xcconfig in Resources */,
 				1F9683E92DD552E2006E981B /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -301,6 +331,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				1FDEEC262DDE2A7900E98D34 /* SPORTX.xcdatamodeld in Sources */,
+				0AD18E272DDE381700A1B1C0 /* FavoritesModel+CoreDataClass.swift in Sources */,
+				0AD18E282DDE381700A1B1C0 /* FavoritesModel+CoreDataProperties.swift in Sources */,
+				0AD18E1C2DDE349700A1B1C0 /* FavoritePresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,7 +384,7 @@
 /* Begin XCBuildConfiguration section */
 		22383C992DD3CD0C00D5362C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1F9684772DD682E4006E981B /* Config.xcconfig */;
+			baseConfigurationReference = 0AD18E142DDE2B9300A1B1C0 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -413,7 +446,7 @@
 		};
 		22383C9A2DD3CD0C00D5362C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1F9684772DD682E4006E981B /* Config.xcconfig */;
+			baseConfigurationReference = 0AD18E142DDE2B9300A1B1C0 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -469,7 +502,7 @@
 		};
 		22383C9C2DD3CD0C00D5362C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1F9684772DD682E4006E981B /* Config.xcconfig */;
+			baseConfigurationReference = 0AD18E142DDE2B9300A1B1C0 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -497,7 +530,7 @@
 		};
 		22383C9D2DD3CD0C00D5362C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1F9684772DD682E4006E981B /* Config.xcconfig */;
+			baseConfigurationReference = 0AD18E142DDE2B9300A1B1C0 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -525,7 +558,7 @@
 		};
 		22383C9F2DD3CD0C00D5362C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1F9684772DD682E4006E981B /* Config.xcconfig */;
+			baseConfigurationReference = 0AD18E142DDE2B9300A1B1C0 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -545,7 +578,7 @@
 		};
 		22383CA02DD3CD0C00D5362C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1F9684772DD682E4006E981B /* Config.xcconfig */;
+			baseConfigurationReference = 0AD18E142DDE2B9300A1B1C0 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -565,6 +598,7 @@
 		};
 		22383CA22DD3CD0C00D5362C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0AD18E142DDE2B9300A1B1C0 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -582,6 +616,7 @@
 		};
 		22383CA32DD3CD0C00D5362C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0AD18E142DDE2B9300A1B1C0 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
