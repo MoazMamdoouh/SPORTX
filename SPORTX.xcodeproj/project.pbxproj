@@ -67,6 +67,7 @@
 		1FDEEA252DDA72CD00E98D34 /* view */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = view; sourceTree = "<group>"; };
 		1FDEEA262DDB640A00E98D34 /* LeaguesScreen */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = LeaguesScreen; sourceTree = "<group>"; };
 		1FDEEA5E2DDBDEE000E98D34 /* FixturesScreen */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = FixturesScreen; sourceTree = "<group>"; };
+		1FDEEC272DDE2F4300E98D34 /* DetailsScreen */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = DetailsScreen; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				0AD18E162DDE33ED00A1B1C0 /* FavoriteScreen */,
+				1FDEEC272DDE2F4300E98D34 /* DetailsScreen */,
 				1FDEEA5E2DDBDEE000E98D34 /* FixturesScreen */,
 				1FDEEA262DDB640A00E98D34 /* LeaguesScreen */,
 				1FDEEA252DDA72CD00E98D34 /* view */,
@@ -199,6 +201,7 @@
 				1FDEEA252DDA72CD00E98D34 /* view */,
 				1FDEEA262DDB640A00E98D34 /* LeaguesScreen */,
 				1FDEEA5E2DDBDEE000E98D34 /* FixturesScreen */,
+				1FDEEC272DDE2F4300E98D34 /* DetailsScreen */,
 			);
 			name = SPORTX;
 			packageProductDependencies = (
