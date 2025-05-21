@@ -60,4 +60,23 @@ class FixturesPresenter {
             coredataRepo.saveLeagueToFavorite(leagueId: Int32(league.leagueKey), leagueName: league.leagueName, leagueImage: league.leagueImage, leagueType: sportsType.rawValue)
         }
     }
+    
+    func cheackIfLeagueExistInCoreData() -> Bool{
+        if coredataRepo == nil {
+            coredataRepo = CoreDataRepoImpl.shared
+        }
+        if let coredataRepo {
+            return  coredataRepo.checkLeagueInCoreData(leagueId: Int32(league.leagueKey))
+        }
+        return false
+    }
+    
+    func deleteLeague(){
+        if coredataRepo == nil {
+            coredataRepo = CoreDataRepoImpl.shared
+        }
+        if let coredataRepo {
+            coredataRepo.deleteLeague(leagueId: Int32(league.leagueKey))
+        }
+    }
 }

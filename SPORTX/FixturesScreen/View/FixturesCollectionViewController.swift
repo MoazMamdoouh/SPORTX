@@ -17,6 +17,8 @@ class FixturesCollectionViewController: UICollectionViewController, FixtureViewP
     var TeamsOrPlayersArray = [TeamOrPlayer]()
 
     var presenter: FixturesPresenter?
+    
+    var isFavorite : Bool?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,13 +27,20 @@ class FixturesCollectionViewController: UICollectionViewController, FixtureViewP
         guard let presenter else { return }
         presenter.view = self
         presenter.getData()
+        
+        isFavorite = presenter.cheackIfLeagueExistInCoreData()
+        updateFavoriteButtonIcon()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        isFavorite = presenter?.cheackIfLeagueExistInCoreData()
+        updateFavoriteButtonIcon()
+    }
     
 
     func setupView() {
         
-        let heartImage = UIImage(systemName: "heart")
+        let heartImage =  UIImage(systemName: isFavorite ?? false ? "heart.fill" : "heart")
         let favoriteButton = UIBarButtonItem(image: heartImage, style: .plain, target: self, action: #selector(favoriteButtonTapped))
         navigationItem.rightBarButtonItem = favoriteButton
         
@@ -264,12 +273,40 @@ class FixturesCollectionViewController: UICollectionViewController, FixtureViewP
     }
     
     @objc func favoriteButtonTapped() {
-        
-        presenter?.saveLeagueToFavorite()
-        print("Favorite button tapped!")
-        
-        
+        guard let presenter else { return }
+
+        if isFavorite == true {
+            deleteLeagueDialogConfermation()
+        } else {
+            presenter.saveLeagueToFavorite()
+            isFavorite?.toggle()
+            updateFavoriteButtonIcon()
+            print("League added to favorites.")
+        }
     }
-    
+
+    func updateFavoriteButtonIcon() {
+        let heartImage = UIImage(systemName: isFavorite ?? false ? "heart.fill" : "heart")
+        navigationItem.rightBarButtonItem?.image = heartImage
+    }
+
+    private func deleteLeagueDialogConfermation() {
+        let alert = UIAlertController(
+            title: "Delete League",
+            message: "Are you sure you want to remove this league from favorites?",
+            preferredStyle: .alert
+        )
+
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+
+        alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
+            self.presenter?.deleteLeague()
+            self.isFavorite?.toggle()
+            self.updateFavoriteButtonIcon()
+            print("League removed from favorites.")
+        }))
+
+        present(alert, animated: true, completion: nil)
+    }
     
 }

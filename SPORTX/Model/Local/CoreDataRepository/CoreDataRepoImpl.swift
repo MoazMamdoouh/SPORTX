@@ -8,7 +8,8 @@
 import Foundation
 
 class CoreDataRepoImpl : CoreDataRepo {
-    
+
+        
     static let shared = CoreDataRepoImpl()
     
     private init() {}
@@ -30,5 +31,8 @@ class CoreDataRepoImpl : CoreDataRepo {
     }
     
     
+    func checkLeagueInCoreData(leagueId: Int32) -> Bool {
+        return CoreDataManager.shared.checkLeagueInCoreData(leagueId: leagueId)
+    }
     
 }

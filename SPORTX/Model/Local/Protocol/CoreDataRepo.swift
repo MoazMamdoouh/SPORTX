@@ -15,4 +15,6 @@ protocol CoreDataRepo {
     func getAllLeagues() -> [FavoritesModel]
     
     func deleteLeague(leagueId: Int32)
+    
+    func checkLeagueInCoreData(leagueId: Int32) -> Bool
 }

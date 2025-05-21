@@ -61,4 +61,22 @@ class CoreDataManager {
             print("Failed to delete league: \(error.localizedDescription)")
         }
     }
+    
+    func checkLeagueInCoreData(leagueId: Int32) -> Bool {
+        
+        let fetchRequest: NSFetchRequest<FavoritesModel> = FavoritesModel.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "leagueId == %d", leagueId)
+        do {
+              let results = try context.fetch(fetchRequest)
+            if results != [] {
+                print("league is exist ")
+                return !results.isEmpty
+            }
+          } catch {
+              print("Failed to fetch league: \(error.localizedDescription)")
+              return false
+          }
+        return false
+    }
+    
 }
