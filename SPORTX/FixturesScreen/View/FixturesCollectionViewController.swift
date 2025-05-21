@@ -9,7 +9,7 @@ import UIKit
 
 private let fixtureReuseIdentifier = "FixtureCollectionViewCell"
 private let teamOrPlayerReuseIdentifier = "TeamOrPlayerCollectionViewCell"
-private let sectionHeaderReuseIdentifier = "SectionHeaderView"
+private let sectionHeaderReuseIdentifier = "SectionHeaderCollectionReusableView"
 
 class FixturesCollectionViewController: UICollectionViewController, FixtureViewProtocol {
     var upcomingMatchesArray = [Fixture]()
@@ -31,7 +31,7 @@ class FixturesCollectionViewController: UICollectionViewController, FixtureViewP
         navigationItem.title = NSLocalizedString("fixtures", comment: "fixtures")
         let fixtureCellNib = UINib(nibName: "FixtureCollectionViewCell", bundle: nil)
         let teamOrPlayerCellNib = UINib(nibName: "TeamOrPlayerCollectionViewCell", bundle: nil)
-        let headerNib = UINib(nibName: "SectionHeaderView", bundle: nil)
+        let headerNib = UINib(nibName: "SectionHeaderCollectionReusableView", bundle: nil)
 
         collectionView.register(fixtureCellNib, forCellWithReuseIdentifier: fixtureReuseIdentifier)
         collectionView.register(teamOrPlayerCellNib, forCellWithReuseIdentifier: teamOrPlayerReuseIdentifier)
@@ -56,7 +56,7 @@ class FixturesCollectionViewController: UICollectionViewController, FixtureViewP
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.85), heightDimension: .absolute(250))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9), heightDimension: .absolute(250))
 
         let myGroup = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
 
@@ -64,15 +64,25 @@ class FixturesCollectionViewController: UICollectionViewController, FixtureViewP
         section.orthogonalScrollingBehavior = .continuous
         section.contentInsets = NSDirectionalEdgeInsets(top: 30, leading: 8, bottom: 8, trailing: 0)
 
-//        section.visibleItemsInvalidationHandler = { items, offset, environment in
-//            items.forEach { item in
-//                let distanceFromCenter = abs((item.frame.midX - offset.x) - environment.container.contentSize.width / 2.0)
-//                let minScale: CGFloat = 0.8
-//                let maxScale: CGFloat = 1.0
-//                let scale = max(maxScale - (distanceFromCenter / environment.container.contentSize.width), minScale)
-//                item.transform = CGAffineTransform(scaleX: scale, y: scale)
-//            }
-//        }
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(50))
+        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: headerSize,
+            elementKind: UICollectionView.elementKindSectionHeader,
+            alignment: .top
+        )
+        section.boundarySupplementaryItems = [sectionHeader]
+
+        section.visibleItemsInvalidationHandler = { items, offset, environment in
+            items
+                .filter { $0.representedElementCategory == .cell }
+                .forEach { item in
+                    let distanceFromCenter = abs((item.frame.midX - offset.x) - environment.container.contentSize.width / 2.0)
+                    let minScale: CGFloat = 0.8
+                    let maxScale: CGFloat = 1.0
+                    let scale = max(maxScale - (distanceFromCenter / environment.container.contentSize.width), minScale)
+                    item.transform = CGAffineTransform(scaleX: scale, y: scale)
+                }
+        }
 
         return section
     }
@@ -81,22 +91,35 @@ class FixturesCollectionViewController: UICollectionViewController, FixtureViewP
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(270))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(250))
 
         let myGroup = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
 
         let section = NSCollectionLayoutSection(group: myGroup)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 16, trailing: 16)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 8, bottom: 8, trailing: 0)
 
-//        section.visibleItemsInvalidationHandler = { items, offset, environment in
-//            items.forEach { item in
-//                let distanceFromCenter = abs((item.frame.midX - offset.x) - environment.container.contentSize.width / 2.0)
-//                let minScale: CGFloat = 0.8
-//                let maxScale: CGFloat = 1.0
-//                let scale = max(maxScale - (distanceFromCenter / environment.container.contentSize.width), minScale)
-//                item.transform = CGAffineTransform(scaleX: scale, y: scale)
-//            }
-//        }
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(50))
+        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: headerSize,
+            elementKind: UICollectionView.elementKindSectionHeader,
+            alignment: .top
+        )
+        section.boundarySupplementaryItems = [sectionHeader]
+
+        section.visibleItemsInvalidationHandler = { items, offset, environment in
+            let centerY = offset.y + environment.container.contentSize.height / 2
+            let maxDistance = environment.container.contentSize.height / 2
+
+            items
+                .filter { $0.representedElementCategory == .cell }
+                .forEach { item in
+                    let distance = abs(item.frame.midY - centerY)
+                    let minScale: CGFloat = 0.8
+                    let maxScale: CGFloat = 1.0
+                    let scale = max(maxScale - distance / maxDistance, minScale)
+                    item.transform = CGAffineTransform(scaleX: scale, y: scale)
+                }
+        }
 
         return section
     }
@@ -113,15 +136,24 @@ class FixturesCollectionViewController: UICollectionViewController, FixtureViewP
         section.orthogonalScrollingBehavior = .continuous
         section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 16, bottom: 16, trailing: 0)
 
-//        section.visibleItemsInvalidationHandler = { items, offset, environment in
-//            items.forEach { item in
-//                let distanceFromCenter = abs((item.frame.midX - offset.x) - environment.container.contentSize.width / 2.0)
-//                let minScale: CGFloat = 0.8
-//                let maxScale: CGFloat = 1.0
-//                let scale = max(maxScale - (distanceFromCenter / environment.container.contentSize.width), minScale)
-//                item.transform = CGAffineTransform(scaleX: scale, y: scale)
-//            }
-//        }
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(50))
+        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: headerSize,
+            elementKind: UICollectionView.elementKindSectionHeader,
+            alignment: .top
+        )
+        section.boundarySupplementaryItems = [sectionHeader]
+
+        section.visibleItemsInvalidationHandler = { items, offset, environment in
+            items.filter { $0.representedElementCategory == .cell }
+                .forEach { item in
+                    let distanceFromCenter = abs((item.frame.midX - offset.x) - environment.container.contentSize.width / 2.0)
+                    let minScale: CGFloat = 0.8
+                    let maxScale: CGFloat = 1.0
+                    let scale = max(maxScale - (distanceFromCenter / environment.container.contentSize.width), minScale)
+                    item.transform = CGAffineTransform(scaleX: scale, y: scale)
+                }
+        }
 
         return section
     }
@@ -138,6 +170,26 @@ class FixturesCollectionViewController: UICollectionViewController, FixtureViewP
     }
 
     // MARK: UICollectionViewDataSource
+
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        guard kind == UICollectionView.elementKindSectionHeader else {
+            print("stopped here")
+            return UICollectionReusableView()
+        }
+
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: sectionHeaderReuseIdentifier, for: indexPath) as! SectionHeaderCollectionReusableView
+
+        let title: String
+        switch indexPath.section {
+        case 0: title = NSLocalizedString("Upcoming Matches", comment: "")
+        case 1: title = NSLocalizedString("Latest Matches", comment: "")
+        case 2: title = NSLocalizedString("Teams or Players", comment: "")
+        default: title = ""
+        }
+
+        header.configure(with: title)
+        return header
+    }
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
