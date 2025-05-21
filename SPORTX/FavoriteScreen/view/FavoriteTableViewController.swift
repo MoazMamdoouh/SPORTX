@@ -7,12 +7,28 @@
 
 import UIKit
 
+private let reuseIdentifier = "LeaguesTableViewCell"
+
 class FavoriteTableViewController: UITableViewController {
 
+    var favoritesModel : [FavoritesModel]?
+    var favoritePresenter : FavoritePresenter?
     override func viewDidLoad() {
         super.viewDidLoad()
 
-       
+        setupView()
+        
+        self.favoritePresenter = FavoritePresenter(coreDataRepo: CoreDataRepoImpl.shared)
+        
+        self.favoritesModel = favoritePresenter?.getAllLeagues()
+        
+    }
+    
+    
+    func setupView() {
+        navigationItem.title = NSLocalizedString("leagues", comment: "leagues")
+        let nib = UINib(nibName: "LeaguesTableViewCell", bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: reuseIdentifier)
     }
 
     // MARK: - Table view data source
@@ -24,15 +40,17 @@ class FavoriteTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 1
+        return favoritesModel?.count ?? 0
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? LeaguesTableViewCell else {
+            return UITableViewCell()
+        }
 
-        
-
+        let currentLeague = favoritesModel?[indexPath.row]
+        cell.setData(imgStringURL: currentLeague?.leagueImage ?? " ", text: currentLeague?.leagueName ?? " ")
         return cell
     }
 

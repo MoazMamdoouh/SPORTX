@@ -20,14 +20,9 @@ class CoreDataRepoImpl : CoreDataRepo {
     }
     
     func getAllLeagues() -> [FavoritesModel] {
-        do {
-        let leagues =  try CoreDataManager.shared.getAllLeagues()
-            
-         return leagues
-            
-        }catch {
-            print("Failed to fetch leagues in repo : \(error.localizedDescription)")
-        }
+       
+       return  CoreDataManager.shared.getAllLeagues()
+       
     }
     
     func deleteLeague(leagueId: Int32) {

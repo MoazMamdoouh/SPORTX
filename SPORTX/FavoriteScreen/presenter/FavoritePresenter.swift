@@ -16,6 +16,10 @@ class FavoritePresenter {
         self.coreDataRepo = coreDataRepo
     }
     
+    func getAllLeagues() -> [FavoritesModel] {
+        
+        return coreDataRepo.getAllLeagues()
+    }
     
     
 }
