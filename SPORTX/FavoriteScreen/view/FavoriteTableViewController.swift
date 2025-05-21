@@ -91,23 +91,30 @@ class FavoriteTableViewController: UITableViewController {
     
     private func deleteLeagueDialogConfermation(leagueId: Int32, indexPath: IndexPath){
         let alert = UIAlertController(
-               title: "Delete League",
-               message: "Are you sure you want to remove this league from favorites?",
-               preferredStyle: .alert
-           )
-           
-           alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-           
-           alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
-               // Perform deletion
-               self.favoritePresenter?.deleteLeague(leagueId: leagueId)
-               self.favoritesModel?.remove(at: indexPath.row)
-               self.tableView.deleteRows(at: [indexPath], with: .fade)
-           }))
-           
-           present(alert, animated: true, completion: nil)
+            title: NSLocalizedString("Delete League" , comment: "Title for delete league alert"),
+            message: NSLocalizedString("delete league confirmation", comment: "Message for delete league alert"),
+            preferredStyle: .alert
+        )
         
+        alert.addAction(UIAlertAction(
+            title: NSLocalizedString("Cancel", comment: "Cancel button"),
+            style: .cancel,
+            handler: nil)
+        )
+        
+        alert.addAction(UIAlertAction(
+            title: NSLocalizedString("Delete", comment: "Delete button"),
+            style: .destructive,
+            handler: { _ in
+                self.favoritePresenter?.deleteLeague(leagueId: leagueId)
+                self.favoritesModel?.remove(at: indexPath.row)
+                self.tableView.deleteRows(at: [indexPath], with: .fade)
+            })
+        )
+        
+        present(alert, animated: true, completion: nil)
     }
+
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     

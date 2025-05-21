@@ -23,3 +23,10 @@
 "coach" = "Coach: ";
 "player details" = "Player Details";
 "team details" = "Team Details";
+"Delete League" = "Delete League";
+"delete league confirmation" = "Are you sure you want to remove this league from favorites?" ;
+"Cancel" = "Cancel" ;
+"Delete" = "Delete" ;
+"no internet" = "No Internet Connection" ;
+"check internet" = "Please check your internet connection." ;
+"OK" = "OK";

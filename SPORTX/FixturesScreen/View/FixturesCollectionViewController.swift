@@ -289,14 +289,19 @@ class FixturesCollectionViewController: UICollectionViewController, FixtureViewP
 
     private func deleteLeagueDialogConfermation() {
         let alert = UIAlertController(
-            title: "Delete League",
-            message: "Are you sure you want to remove this league from favorites?",
+            title: NSLocalizedString("Delete League" , comment: "Title for delete league alert"),
+            message: NSLocalizedString("delete league confirmation", comment: "Message for delete league alert"),
             preferredStyle: .alert
         )
 
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(
+            title: NSLocalizedString("Cancel", comment: "Cancel button"),
+            style: .cancel,
+            handler: nil)
+        )
 
-        alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
+        alert.addAction(UIAlertAction(
+            title: NSLocalizedString("Delete", comment: "Delete button"), style: .destructive, handler: { _ in
             self.presenter?.deleteLeague()
             self.isFavorite?.toggle()
             self.updateFavoriteButtonIcon()
