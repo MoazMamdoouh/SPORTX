@@ -30,6 +30,11 @@ class FixturesCollectionViewController: UICollectionViewController, FixtureViewP
     
 
     func setupView() {
+        
+        let heartImage = UIImage(systemName: "heart")
+        let favoriteButton = UIBarButtonItem(image: heartImage, style: .plain, target: self, action: #selector(favoriteButtonTapped))
+        navigationItem.rightBarButtonItem = favoriteButton
+        
         navigationItem.title = NSLocalizedString("fixtures", comment: "fixtures")
         let fixtureCellNib = UINib(nibName: "FixtureCollectionViewCell", bundle: nil)
         let teamOrPlayerCellNib = UINib(nibName: "TeamOrPlayerCollectionViewCell", bundle: nil)
@@ -258,6 +263,13 @@ class FixturesCollectionViewController: UICollectionViewController, FixtureViewP
         }
     }
     
+    @objc func favoriteButtonTapped() {
+        
+        presenter?.saveLeagueToFavorite()
+        print("Favorite button tapped!")
+        
+        
+    }
     
     
 }

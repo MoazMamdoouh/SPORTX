@@ -21,5 +21,9 @@ class FavoritePresenter {
         return coreDataRepo.getAllLeagues()
     }
     
+    func deleteLeague(leagueId: Int32) {
+        coreDataRepo.deleteLeague(leagueId: leagueId)
+    }
+    
     
 }

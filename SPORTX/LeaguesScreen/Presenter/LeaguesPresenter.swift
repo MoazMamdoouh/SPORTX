@@ -27,7 +27,7 @@ class LeaguesPresenter {
         }
     }
     
-    func setupFixturePresenter(leagueId: Int) -> FixturesPresenter{
-        return FixturesPresenter(sportsType: sportsType, SportsRepo: SportsRepo, leagueId: leagueId, coreDataRepo: CoreDataRepoImpl.shared)
+    func setupFixturePresenter(league : League) -> FixturesPresenter{
+        return FixturesPresenter(sportsType: sportsType, SportsRepo: SportsRepo, league : league)
     }
 }

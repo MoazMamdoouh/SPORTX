@@ -40,6 +40,7 @@ class FavoriteTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
+        print(" favorites leagues count =  \(String(describing: favoritesModel?.count))")
         return favoritesModel?.count ?? 0
     }
 
@@ -53,7 +54,11 @@ class FavoriteTableViewController: UITableViewController {
         cell.setData(imgStringURL: currentLeague?.leagueImage ?? " ", text: currentLeague?.leagueName ?? " ")
         return cell
     }
-
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let height = self.view.bounds.height
+        return height / 8
+    }
 
     /*
     // Override to support conditional editing of the table view.
@@ -63,17 +68,17 @@ class FavoriteTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
+            guard let leagueId = favoritesModel?[indexPath.row].leagueId else {return }
+            favoritePresenter?.deleteLeague(leagueId: leagueId )
+            favoritesModel?.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
     }
-    */
+    
 
     /*
     // Override to support rearranging the table view.

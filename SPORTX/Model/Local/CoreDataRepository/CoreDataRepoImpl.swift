@@ -26,7 +26,7 @@ class CoreDataRepoImpl : CoreDataRepo {
     }
     
     func deleteLeague(leagueId: Int32) {
-        print("delete item called ")
+        CoreDataManager.shared.deleteLeague(leagueId: leagueId)
     }
     
     
