@@ -13,6 +13,8 @@ class FavoriteTableViewController: UITableViewController {
 
     var favoritesModel : [FavoritesModel]?
     var favoritePresenter : FavoritePresenter?
+    var isNetworkConnecter : Bool?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,6 +23,10 @@ class FavoriteTableViewController: UITableViewController {
         self.favoritePresenter = FavoritePresenter(coreDataRepo: CoreDataRepoImpl.shared)
         
         self.favoritesModel = favoritePresenter?.getAllLeagues()
+        
+        ReachabilityManager.simulateOffline(false)
+        isNetworkConnecter = ReachabilityManager.isReachable()
+        print("in the viewLoaded \(String(describing: isNetworkConnecter))")
         
     }
     
@@ -105,12 +111,26 @@ class FavoriteTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     
+        if !ReachabilityManager.isReachable() {
+            showNoInternetAlert()
+            return
+        }
+        
         let storyboard = UIStoryboard(name: "Fixtures", bundle: nil)
         guard let fixturesVC = storyboard.instantiateViewController(withIdentifier: "Fixtures") as? FixturesCollectionViewController else { return }
         fixturesVC.presenter = favoritePresenter?.setupFixturePresenter(index: indexPath.row)
         navigationController?.pushViewController(fixturesVC, animated: true)
     }
-        
+     
+    private func showNoInternetAlert() {
+        let alert = UIAlertController(
+            title: "No Internet Connection",
+            message: "Please check your internet connection.",
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
 
     /*
     // Override to support rearranging the table view.

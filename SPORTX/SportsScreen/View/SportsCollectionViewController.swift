@@ -17,12 +17,22 @@ class SportsCollectionViewController: UICollectionViewController {
         SportModel(title: NSLocalizedString("tennis", comment: "tennis"), imageName: "tennis", type: .tennis),
     ]
 
+    var isNetworkConnecter : Bool?
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupView()
+        
+        ReachabilityManager.simulateOffline(false)
+        isNetworkConnecter = ReachabilityManager.isReachable()
+        print("in the viewLoaded \(String(describing: isNetworkConnecter))")
     }
 
+//    override func viewWillAppear(_ animated: Bool) {
+//        isNetworkConnecter = ReachabilityManager.isReachable()
+//        print("in the viewLoaded \(String(describing: isNetworkConnecter))")
+//    }
+//    
     func setupView() {
         navigationItem.title = NSLocalizedString("sports", comment: "sports")
         let nib = UINib(nibName: "SportsCollectionViewCell", bundle: nil)
@@ -58,6 +68,10 @@ class SportsCollectionViewController: UICollectionViewController {
     // MARK: UICollectionViewDelegate
 
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if !ReachabilityManager.isReachable() {
+            showNoInternetAlert()
+            return
+        }
         let selectedSport = sportsArray[indexPath.row]
         let storyboard = UIStoryboard(name: "Leagues", bundle: nil)
         guard let leaguesVC = storyboard.instantiateViewController(withIdentifier: "leagues") as? LeaguesTableViewController else { return }
@@ -65,6 +79,18 @@ class SportsCollectionViewController: UICollectionViewController {
         leaguesVC.presenter = LeaguesPresenter(sportsType: selectedSport.type)
         navigationController?.pushViewController(leaguesVC, animated: true)
     }
+
+    
+    private func showNoInternetAlert() {
+        let alert = UIAlertController(
+            title: "No Internet Connection",
+            message: "Please check your internet connection.",
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
+
 }
 
 extension SportsCollectionViewController: UICollectionViewDelegateFlowLayout {
@@ -93,4 +119,6 @@ extension SportsCollectionViewController: UICollectionViewDelegateFlowLayout {
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 20
     }
+    
+    
 }
