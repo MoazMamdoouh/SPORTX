@@ -22,12 +22,16 @@ final class NetworkManager : NetworkManagerProtocol {
         var fullParams = parameters
         fullParams["met"] = met.rawValue
         fullParams["APIkey"] = APIConstants.apiKey
+        
+        print(fullParams)
 
         let url = "\(APIConstants.baseURL)/\(sport.rawValue)/"
 
         var fullURL = URLComponents(string: url)
         fullURL?.queryItems = fullParams.map { URLQueryItem(name: $0.key, value: $0.value) }
         guard let fullURL = fullURL else { return }
+        print(fullURL)
+
 
         AF.request(fullURL)
             .validate()

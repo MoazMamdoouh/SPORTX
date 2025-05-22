@@ -11,6 +11,7 @@ struct DatesGenerator {
     static func generateDates(numberOfDaysBefore: Int, numberOfDaysAfter: Int) -> (startDate: String, endDate: String) {
         
         let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
         formatter.dateFormat = "yyyy-MM-dd"
 
         let currentDate = Date()

@@ -83,11 +83,11 @@ class SportsCollectionViewController: UICollectionViewController {
     
     private func showNoInternetAlert() {
         let alert = UIAlertController(
-            title: NSLocalizedString("no_internet", comment: "No internet title"),
-            message: NSLocalizedString("check_internet", comment: "No internet message"),
+            title: NSLocalizedString("no internet", comment: "No internet title"),
+            message: NSLocalizedString("check internet", comment: "No internet message"),
             preferredStyle: .alert
         )
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: "OK button"), style: .default))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: "OK button"), style: .default))
         present(alert, animated: true)
     }
 
