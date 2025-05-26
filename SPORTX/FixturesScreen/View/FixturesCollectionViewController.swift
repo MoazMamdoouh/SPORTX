@@ -10,6 +10,7 @@ import UIKit
 private let fixtureReuseIdentifier = "FixtureCollectionViewCell"
 private let teamOrPlayerReuseIdentifier = "TeamOrPlayerCollectionViewCell"
 private let sectionHeaderReuseIdentifier = "SectionHeaderCollectionReusableView"
+private let emptyReuseIdentifier = "EmptyCollectionViewCell"
 
 class FixturesCollectionViewController: UICollectionViewController, FixtureViewProtocol {
     var upcomingMatchesArray = [Fixture]()
@@ -48,7 +49,7 @@ class FixturesCollectionViewController: UICollectionViewController, FixtureViewP
 
         collectionView.register(fixtureCellNib, forCellWithReuseIdentifier: fixtureReuseIdentifier)
         collectionView.register(teamOrPlayerCellNib, forCellWithReuseIdentifier: teamOrPlayerReuseIdentifier)
-
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: emptyReuseIdentifier)
         collectionView.register(headerNib, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: sectionHeaderReuseIdentifier)
 
         let layout = UICollectionViewCompositionalLayout { [weak self] index, _ in
@@ -211,17 +212,41 @@ class FixturesCollectionViewController: UICollectionViewController, FixtureViewP
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section {
-        case 0: return upcomingMatchesArray.count
-        case 1: return latestMatchesArray.count
-        case 2: return TeamsOrPlayersArray.count
+        case 0: return upcomingMatchesArray.isEmpty ? 1 : upcomingMatchesArray.count
+        case 1: return latestMatchesArray.isEmpty ? 1 : latestMatchesArray.count
+        case 2: return TeamsOrPlayersArray.isEmpty ? 1 : TeamsOrPlayersArray.count
         default:
             return 0
         }
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        func makeEmptyCell(with message: String, for indexPath: IndexPath) -> UICollectionViewCell {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: emptyReuseIdentifier, for: indexPath)
+            cell.contentView.subviews.forEach { $0.removeFromSuperview() }
+
+            let label = UILabel()
+            label.text = message
+            label.font = .systemFont(ofSize: 19, weight: .bold)
+            label.textColor = .systemGray
+            label.textAlignment = .center
+            label.numberOfLines = 0
+            label.translatesAutoresizingMaskIntoConstraints = false
+            cell.contentView.addSubview(label)
+            NSLayoutConstraint.activate([
+                label.centerXAnchor.constraint(equalTo: cell.contentView.centerXAnchor),
+                label.centerYAnchor.constraint(equalTo: cell.contentView.centerYAnchor),
+                label.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor, constant: 8),
+                label.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor, constant: -8)
+            ])
+            return cell
+        }
+
         switch indexPath.section {
         case 0:
+            guard !upcomingMatchesArray.isEmpty else {
+                return makeEmptyCell(with: NSLocalizedString("no upcoming matches", comment: ""), for: indexPath)
+            }
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: fixtureReuseIdentifier, for: indexPath) as? FixtureCollectionViewCell else { return UICollectionViewCell() }
             let currentData = upcomingMatchesArray[indexPath.row]
 
@@ -234,6 +259,9 @@ class FixturesCollectionViewController: UICollectionViewController, FixtureViewP
                          finalResult: nil)
             return cell
         case 1:
+            guard !latestMatchesArray.isEmpty else {
+                return makeEmptyCell(with: NSLocalizedString("no latest matches", comment: ""), for: indexPath)
+            }
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: fixtureReuseIdentifier, for: indexPath) as? FixtureCollectionViewCell else { return UICollectionViewCell() }
             let currentData = latestMatchesArray[indexPath.row]
 
@@ -246,6 +274,9 @@ class FixturesCollectionViewController: UICollectionViewController, FixtureViewP
                          finalResult: currentData.finalResult)
             return cell
         case 2:
+            guard !TeamsOrPlayersArray.isEmpty else {
+                return makeEmptyCell(with: NSLocalizedString("no teams or players", comment: ""), for: indexPath)
+            }
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: teamOrPlayerReuseIdentifier, for: indexPath) as? TeamOrPlayerCollectionViewCell else { return UICollectionViewCell() }
             let currentData = TeamsOrPlayersArray[indexPath.row]
             cell.setData(teamOrPlayerName: currentData.name, imageUrlString: currentData.image)
@@ -265,7 +296,6 @@ class FixturesCollectionViewController: UICollectionViewController, FixtureViewP
             detailsVC.TeamOrPlayer = TeamsOrPlayersArray[indexPath.row]
             detailsVC.sportType = presenter?.sportsType
             navigationController?.pushViewController(detailsVC, animated: true)
-            print(TeamsOrPlayersArray[indexPath.row].players)
         }
     }
 

@@ -30,3 +30,6 @@
 "no internet" = "No Internet Connection" ;
 "check internet" = "Please check your internet connection." ;
 "ok" = "OK";
+"no upcoming matches" = "There is no upcoming matches";
+"no latest matches" = "There is no latest matches in that date";
+"no teams or players" = "There is no Teams or Players";

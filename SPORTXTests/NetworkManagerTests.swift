@@ -36,4 +36,21 @@ final class NetworkManagerTests: XCTestCase {
         }
         waitForExpectations(timeout: 5)
     }
+    
+    func testApiCall2() throws {
+        let expectation = expectation(description: "Wait for network call")
+
+        
+        networkManager.fetchData(sport: .football, met: .teams, parameters: ["leagueId":"302"], responseType: FootballTeamResponse.self) { result in
+            if result == nil {
+                XCTFail()
+                return
+            }
+            if let result {
+                XCTAssertEqual(result.result.count, 20)
+                expectation.fulfill()
+            }
+        }
+        waitForExpectations(timeout: 15)
+    }
 }

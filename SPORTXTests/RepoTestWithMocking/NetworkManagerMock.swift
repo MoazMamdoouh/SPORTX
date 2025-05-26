@@ -12,6 +12,7 @@ struct MockData: Decodable{
     let id: Int
     let name: String
 }
+
 class MockNetworkManager: NetworkManagerProtocol {
     var shouldReturnError: Bool
     var mockData: Any
