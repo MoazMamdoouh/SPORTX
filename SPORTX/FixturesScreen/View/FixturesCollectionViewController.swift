@@ -187,7 +187,6 @@ class FixturesCollectionViewController: UICollectionViewController, FixtureViewP
 
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard kind == UICollectionView.elementKindSectionHeader else {
-            // print("stopped here")
             return UICollectionReusableView()
         }
 

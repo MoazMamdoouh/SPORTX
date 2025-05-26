@@ -8,10 +8,11 @@
 import UIKit
 
 private let reuseIdentifier = "LeaguesTableViewCell"
+private let emptyReuseIdentifier = "EmptyCollectionViewCell"
 
 class FavoriteTableViewController: UITableViewController {
 
-    var favoritesModel : [FavoritesModel]?
+    var favoritesLeagues : [FavoritesModel] = []
     var favoritePresenter : FavoritePresenter?
     var isNetworkConnecter : Bool?
     
@@ -22,7 +23,7 @@ class FavoriteTableViewController: UITableViewController {
         
         self.favoritePresenter = FavoritePresenter(coreDataRepo: CoreDataRepoImpl.shared)
         
-        self.favoritesModel = favoritePresenter?.getAllLeagues()
+        self.favoritesLeagues = favoritePresenter?.getAllLeagues() ?? []
         
         ReachabilityManager.simulateOffline(false)
         isNetworkConnecter = ReachabilityManager.isReachable()
@@ -31,7 +32,7 @@ class FavoriteTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        favoritesModel = favoritePresenter?.getAllLeagues()
+        favoritesLeagues = favoritePresenter?.getAllLeagues() ?? []
         tableView.reloadData()
     }
     
@@ -40,12 +41,13 @@ class FavoriteTableViewController: UITableViewController {
         navigationItem.title = NSLocalizedString("favorite", comment: "favorite")
         let nib = UINib(nibName: "LeaguesTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: reuseIdentifier)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: emptyReuseIdentifier)
+
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
@@ -53,17 +55,43 @@ class FavoriteTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
 
-        return favoritesModel?.count ?? 0
+        return favoritesLeagues.isEmpty ? 1 : favoritesLeagues.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        func makeEmptyCell(with message: String, for indexPath: IndexPath) -> UITableViewCell {
+            let cell = tableView.dequeueReusableCell(withIdentifier: emptyReuseIdentifier, for: indexPath)
+            cell.contentView.subviews.forEach { $0.removeFromSuperview() }
+
+            let label = UILabel()
+            label.text = message
+            label.font = .systemFont(ofSize: 19, weight: .bold)
+            label.textColor = .systemGray
+            label.textAlignment = .center
+            label.numberOfLines = 0
+            label.translatesAutoresizingMaskIntoConstraints = false
+            cell.contentView.addSubview(label)
+            NSLayoutConstraint.activate([
+                label.centerXAnchor.constraint(equalTo: cell.contentView.centerXAnchor),
+                label.centerYAnchor.constraint(equalTo: cell.contentView.centerYAnchor),
+                label.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor, constant: 8),
+                label.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor, constant: -8)
+            ])
+            return cell
+        }
+        
+        guard !favoritesLeagues.isEmpty else {
+            return makeEmptyCell(with: NSLocalizedString("no favorite leagues", comment: ""), for: indexPath)
+        }
+
+        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? LeaguesTableViewCell else {
             return UITableViewCell()
         }
 
-        let currentLeague = favoritesModel?[indexPath.row]
-        cell.setData(imgStringURL: currentLeague?.leagueImage ?? " ", text: currentLeague?.leagueName ?? " ")
+        let currentLeague = favoritesLeagues[indexPath.row]
+        cell.setData(imgStringURL: currentLeague.leagueImage ?? "", text: currentLeague.leagueName ?? "")
         return cell
     }
     
@@ -72,19 +100,10 @@ class FavoriteTableViewController: UITableViewController {
         return height / 8
     }
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
     
-    // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-              guard let league = favoritesModel?[indexPath.row] else { return }
+            let league = favoritesLeagues[indexPath.row]
             self.deleteLeagueDialogConfermation(leagueId: league.leagueId, indexPath: indexPath)
           }
     }
@@ -107,8 +126,12 @@ class FavoriteTableViewController: UITableViewController {
             style: .destructive,
             handler: { _ in
                 self.favoritePresenter?.deleteLeague(leagueId: leagueId)
-                self.favoritesModel?.remove(at: indexPath.row)
-                self.tableView.deleteRows(at: [indexPath], with: .fade)
+                self.favoritesLeagues.remove(at: indexPath.row)
+                if self.favoritesLeagues.isEmpty {
+                    self.tableView.reloadData()
+                } else {
+                    self.tableView.deleteRows(at: [indexPath], with: .fade)
+                }
             })
         )
         

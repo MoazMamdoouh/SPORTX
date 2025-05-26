@@ -32,4 +32,6 @@
 "ok" = "OK";
 "no upcoming matches" = "There is no upcoming matches";
 "no latest matches" = "There is no latest matches in that date";
-"no teams or players" = "There is no Teams or Players";
+"no teams or players" = "There is no teams or players";
+"no favorite leagues" = "There is no favorite leagues, you can add leagues to favorite from leagues screen";
+
